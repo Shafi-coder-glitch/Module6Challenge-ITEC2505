@@ -1,0 +1,76 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Teen Hangout";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Teen Hangout</h1>
+</div>
+
+<div>
+    <h2>Our Members</h2>
+
+    @* Display all five members. *@
+    @foreach (var user in Model.Users)
+    {
+        <div class="alert alert-info">
+            <strong>@user.Username</strong> - Age: @user.Age - Favorite Color: @user.FavoriteColor
+        </div>
+    }
+
+    <h2>Recent Posts</h2>
+
+    @* Display all five posts. *@
+    @foreach (var post in Model.Posts)
+    {
+        <div class="alert alert-primary">
+            <strong>@post.Username</strong>: @post.Content
+            <br />
+            Likes: @post.Likes
+        </div>
+    }
+
+    <h2>Popular Posts</h2>
+
+    @* Display posts with 20 or more likes. *@
+    @foreach (var post in Model.Posts)
+    {
+        if (post.Likes >= 20)
+        {
+            <div class="alert alert-success">
+                <strong>@post.Username</strong>: @post.Content
+                <br />
+                Likes: @post.Likes
+            </div>
+        }
+    }
+
+    <h2>Members Age 16 or Older</h2>
+
+    @* Display members who are 16 or older. *@
+    @foreach (var user in Model.Users)
+    {
+        if (user.Age >= 16)
+        {
+            <div class="alert alert-warning">
+                <strong>@user.Username</strong> - Age: @user.Age
+            </div>
+        }
+    }
+
+    <h2>Posts With Fewer Than 20 Likes</h2>
+
+    @* Display posts with fewer than 20 likes. *@
+    @foreach (var post in Model.Posts)
+    {
+        if (post.Likes < 20)
+        {
+            <div class="alert alert-dark">
+                <strong>@post.Username</strong>: @post.Content
+                <br />
+                Likes: @post.Likes
+            </div>
+        }
+    }
+</div>
